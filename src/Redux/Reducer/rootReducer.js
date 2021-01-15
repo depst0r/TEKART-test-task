@@ -66,9 +66,10 @@ export const rootReducer = (state = initialState, action) => {
                 step: action.payload
             }
         case TOTAL: 
+        console.log('total', action.data)
             return {
                 ...state,
-                total: action.payload
+                total: action.data
             }
         default: 
             return state

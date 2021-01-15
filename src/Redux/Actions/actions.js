@@ -23,8 +23,8 @@ export const size = arr => ({ type: SIZE, payload: arr})
 export const steps = step => ({ type: STEPS, payload: step })
 
 export const getTotal = () => {
-    return dispatch => {
-        fetch(`https://data.techart.ru/lab/json/?building=${building}&height=${height}&material=${material}&sizex=${sizeX}&sizey=${sizeY}`)
+    return (dispatch, getState) => {
+        fetch(`https://data.techart.ru/lab/json/?building=${getState.building}&height=${getState.height}&material=${getState.material}&sizex=${getState.sizeX}&sizey=${getState.sizeY}`)
             .then(res => res.json())
             .then(res => dispatch({ type: TOTAL, data: res }))
     }
