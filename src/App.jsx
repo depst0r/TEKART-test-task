@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material, size, steps } from './Redux/Actions/actions'
+import { building, height, material, size, steps, getTotal } from './Redux/Actions/actions'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -16,9 +16,11 @@ export const App = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state.rootReducer)
 
-  console.log(selector.step );
 
-
+  const click = (action, step) => {
+    dispatch(action)
+    dispatch(step)
+  }
 
 const renderItems = () => {
   switch (selector.step) {
@@ -40,9 +42,7 @@ const renderItems = () => {
       type="button" 
       className="btn btn-outline-info ml-5" 
       onClick={() => 
-      dispatch(
-        building(checkedValue),
-        )}>Далее</button>
+        click(building(checkedValue), steps(2))}>Далее</button>
     </div>
   </>
   )
@@ -56,7 +56,7 @@ const renderItems = () => {
       </div>
       <div className="card-footer text-muted">
         <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Отмена</button>
-        <button type="button" className="btn btn-outline-info ml-5" onClick={() => dispatch(height(heightValue))}>Далее</button>
+        <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(height(heightValue), steps(3))}>Далее</button>
       </div>
     </>
     )
@@ -77,7 +77,7 @@ const renderItems = () => {
     </div>
     <div className="card-footer text-muted">
       <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Отмена</button>
-      <button type="button" className="btn btn-outline-info ml-5" onClick={() => dispatch(material(materialValues))}>Далее</button>
+      <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(material(materialValues), steps(4))}>Далее</button>
     </div>
   </>
     )

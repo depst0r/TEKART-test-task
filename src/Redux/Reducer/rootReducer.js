@@ -12,16 +12,15 @@ import {
 
 const initialState = {
     step: 1,
-    building: String,
-    height: String,
+    building: null,
+    height: null,
     material: null,
-    sizeX: String,
-    sizeY: String,
+    sizeX: null,
+    sizeY: null,
     result: Boolean,
-    message: String,
-    total: String,
+    message: null,
+    total: null,
     size: null
-    // choice: Boolean
 }
 
 export const rootReducer = (state = initialState, action) => {
