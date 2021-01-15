@@ -121,7 +121,9 @@ const renderItems = () => {
       <>
       <div className="card-body">
       <span className='text-muted'>Результат расчета</span>
-      <h5 className="card-title">Ошибка</h5>
+      <h5 className="card-title">{selector?.total?.result === 'ok' ? (
+        <p>Успешно</p>
+      ) : <h1>Ошибка</h1> }</h5>
         <p>{selector?.total?.message}</p>
     </div>
     <div className="card-footer text-muted">
