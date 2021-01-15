@@ -7,9 +7,11 @@ import {
     RESULT,
     MESSAGE,
     TOTAL,
+    STEPS
 } from '../Actions/actionType'
 
 const initialState = {
+    step: 1,
     building: String,
     height: String,
     material: null,
@@ -58,6 +60,11 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 message: action.payload
+            }
+        case STEPS:
+            return {
+                ...state,
+                step: action.payload
             }
         case TOTAL: 
             return {
