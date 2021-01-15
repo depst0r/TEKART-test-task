@@ -21,10 +21,11 @@ export const App = () => {
     dispatch(step)
   }
 
-  const size = ( arg2, arg3) => {
-    totalResponse()
+  const size = ( arg2, arg3, step) => {
     dispatch(arg2)
     dispatch(arg3)
+    dispatch(step)
+    totalResponse()
   }
 
   const totalResponse = () => {
@@ -121,10 +122,10 @@ const renderItems = () => {
       <div className="card-body">
       <span className='text-muted'>Результат расчета</span>
       <h5 className="card-title">Ошибка</h5>
-        <p>{selector?.total.message}</p>
+        <p>{selector?.total?.message}</p>
     </div>
     <div className="card-footer text-muted">
-      <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Новый расчет</button>
+      <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Новый расчет</button>
     </div>
   </>
     )

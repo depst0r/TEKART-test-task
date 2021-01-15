@@ -18,9 +18,7 @@ const initialState = {
     sizeX: null,
     sizeY: null,
     result: Boolean,
-    message: null,
     total: null,
-    size: null
 }
 
 export const rootReducer = (state = initialState, action) => {
