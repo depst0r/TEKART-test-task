@@ -7,6 +7,7 @@ import {
     RESULT,
     MESSAGE,
     TOTAL,
+    SIZE
 } from './actionType'
 
 export const building = text => ({ type: BUILDING, payload: text })
@@ -17,3 +18,4 @@ export const sizeY = text => ({ type: SIZE_Y, payload: text })
 export const result = text => ({ type: RESULT, payload: text })
 export const message = text => ({ type: MESSAGE, payload: text })
 export const total = url => ({ type: TOTAL, payload: url })
+export const size = arr => ({ type: SIZE, payload: arr})

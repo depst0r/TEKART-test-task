@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material } from './Redux/Actions/actions'
+import { building, height, material, size } from './Redux/Actions/actions'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -82,7 +82,15 @@ const renderItems = () => {
     </div>
     <div className="card-footer text-muted">
       <button type="button" className="btn btn-outline-warning" onClick={() => setStep(1)}>Отмена</button>
-      <button type="button" className="btn btn-outline-info ml-5" onClick={() => dispatch(height(heightValue))}>Далее</button>
+      <button 
+      type="button" 
+      className="btn btn-outline-info ml-5" 
+      onClick={() => dispatch(
+        size({
+          sizeX: sizeValue_X,
+          sizeY: sizeValue_Y
+        })
+      )}>Далее</button>
     </div>
   </>
     )

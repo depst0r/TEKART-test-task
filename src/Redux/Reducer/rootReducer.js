@@ -18,6 +18,7 @@ const initialState = {
     result: Boolean,
     message: String,
     total: String,
+    size: null
     // choice: Boolean
 }
 
