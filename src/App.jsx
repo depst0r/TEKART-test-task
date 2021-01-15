@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { building, height, material, sizeX, sizeY, steps, getTotal } from './Redux/Actions/actions'
 
@@ -6,8 +6,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 export const App = () => {
 
-  
-  // const [step, setStep] = useState(1)
   const [checkedValue, setCeckedValue] = useState(String)
   const [heightValue, setHeightValue] = useState(String)
   const [materialValues, setMaterialValues] = useState(String)
@@ -34,6 +32,8 @@ export const App = () => {
         getTotal()
       )
   }
+
+
 
 const renderItems = () => {
   switch (selector.step) {
@@ -110,8 +110,21 @@ const renderItems = () => {
       <button 
       type="button" 
       className="btn btn-outline-info ml-5" 
-      onClick={() => size(sizeX(sizeValue_X), sizeY(sizeValue_Y))}
+      onClick={() => size(sizeX(sizeValue_X), sizeY(sizeValue_Y), steps(5))}
       >Далее</button>
+    </div>
+  </>
+    )
+  case 5:
+    return (
+      <>
+      <div className="card-body">
+      <span className='text-muted'>Результат расчета</span>
+      <h5 className="card-title">Ошибка</h5>
+        <p>{selector?.total.message}</p>
+    </div>
+    <div className="card-footer text-muted">
+      <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Новый расчет</button>
     </div>
   </>
     )
