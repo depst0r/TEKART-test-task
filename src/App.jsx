@@ -34,6 +34,11 @@ export const App = () => {
       )
   }
 
+  console.log();
+
+  // const reset = () => {
+  //   selector
+  // }
 
 
 const renderItems = () => {
@@ -121,15 +126,15 @@ const renderItems = () => {
       <>
       <div className="card-body">
       <span className='text-muted'>Результат расчета</span>
-      <h5 className="card-title">{selector?.total?.result === 'ok' ? (
+      <div className="card-title">{selector?.total?.result === 'ok' ? (
         <p>Успешно</p>
-      ) : <h1>Ошибка</h1> }</h5>
+      ) : <h1>Ошибка</h1> }</div>
         <p>{selector?.total?.message}</p>
     </div>
     <div className="card-footer text-muted">
       <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Новый расчет</button>
     </div>
-  </>
+  </>  
     )
     default:
       break;

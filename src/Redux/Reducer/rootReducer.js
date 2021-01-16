@@ -4,8 +4,6 @@ import {
     MATERIAL,
     SIZE_X,
     SIZE_Y,
-    RESULT,
-    MESSAGE,
     TOTAL,
     STEPS
 } from '../Actions/actionType'
@@ -17,7 +15,6 @@ const initialState = {
     material: null,
     sizeX: null,
     sizeY: null,
-    result: Boolean,
     total: null,
 }
 
@@ -47,16 +44,6 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 sizeY: action.payload
-            }
-        case RESULT:
-            return {
-                ...state,
-                result: action.payload
-            }
-        case MESSAGE:
-            return {
-                ...state,
-                message: action.payload
             }
         case STEPS:
             return {
