@@ -9,7 +9,8 @@ export const Step_1 = () => {
   const dispatch = useDispatch()
 
   const [checkedValue, setCeckedValue] = useState(String)
-  const click = (action, step) => {
+
+  const handleSubmiteClick = (action, step) => {
     dispatch(action)
     dispatch(step)
   }
@@ -49,7 +50,7 @@ export const Step_1 = () => {
           type="button"
           className="btn btn-outline-info ml-5"
           onClick={() =>
-            click(building(checkedValue), steps(2))}>Далее</button>
+            handleSubmiteClick(building(checkedValue), steps(2))}>Далее</button>
         }
       </div>
     </>
@@ -61,7 +62,7 @@ export const Step_2 = () => {
 
   const dispatch = useDispatch()
 
-  const click = (action, step) => {
+  const handleSubmiteClick = (action, step) => {
     dispatch(action)
     dispatch(step)
   }
@@ -87,7 +88,7 @@ export const Step_2 = () => {
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => click(height(heightValue), steps(3))}>Далее</button>}
+            onClick={() => handleSubmiteClick(height(heightValue), steps(3))}>Далее</button>}
       </div>
         </>
   )
@@ -100,7 +101,7 @@ export const Step_3 = () => {
   const selector = useSelector(state => state.rootReducer)
   const dispatch = useDispatch()
 
-  const click = (action, step) => {
+  const handleSubmiteClick = (action, step) => {
     dispatch(action)
     dispatch(step)
   }
@@ -158,7 +159,7 @@ export const Step_3 = () => {
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
+            onClick={() => handleSubmiteClick(material(materialValues), steps(4))}>Далее</button>}
       </div>
     </>
   )
@@ -260,7 +261,11 @@ export const App = () => {
       case 1:
          return <Step_1 />
       case 2:
-          return <Step_2 />
+          return <>
+            {selector.building === '2' ? (
+              <Step_3 />
+            ) : <Step_2 />}
+          </>
       case 3:
         return <Step_3 />
       case 4:
