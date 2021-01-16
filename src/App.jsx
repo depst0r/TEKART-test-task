@@ -34,7 +34,6 @@ export const App = () => {
       )
   }
 
-  console.log();
 
   // const reset = () => {
   //   selector
@@ -69,15 +68,40 @@ const renderItems = () => {
   case 2:
     return (
         <>
-        <div className="card-body">
-        <span className='text-muted'>Шаг 2</span>
-        <h5 className="card-title">Колличество этажей (число):</h5>
-          <input type="number" value={heightValue} onChange={e => setHeightValue(e.target.value)}/>
-      </div>
-      <div className="card-footer text-muted">
-        <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Отмена</button>
-        {heightValue && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(height(heightValue), steps(3))}>Далее</button>}
-      </div>
+        {selector.building === '1' ? (
+          <>
+          <div className="card-body">
+          <span className='text-muted'>Шаг 2</span>
+          <h5 className="card-title">Колличество этажей (число):</h5>
+            <input type="number" value={heightValue} onChange={e => setHeightValue(e.target.value)}/>
+        </div>
+        <div className="card-footer text-muted">
+          <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Отмена</button>
+          {heightValue && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(height(heightValue), steps(3))}>Далее</button>}
+        </div>
+        </>
+        ) : (
+          <div>
+                 <>
+      <div className="card-body">
+      <span className='text-muted'>Шаг 2</span>
+      <h5 className="card-title">Материал Стен:</h5>
+      <input type="radio" value='1' className="btn-check" name="btnradio" id='1' autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
+      <label className="card-text text-success font-weight-bold" htmlFor="1">Кирпич</label>
+      <br />
+      <input type="radio" value='2' className="btn-check" name="btnradio" id="2" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
+      <label className="card-text text-success font-weight-bold" htmlFor="2">Шлакоблок</label>
+      <br/>
+      <input type="radio" value='3' className="btn-check" name="btnradio" id="3" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
+      <label className="card-text text-success font-weight-bold" htmlFor="3">Деревянный брус</label>
+    </div>
+    <div className="card-footer text-muted">
+      <button type="button" className="btn btn-outline-warning"  onClick={() => dispatch(steps(1))}>Отмена</button>
+      {materialValues && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
+    </div>
+  </>
+          </div>
+        )}
     </>
     )
   case 3:
@@ -127,7 +151,7 @@ const renderItems = () => {
       <div className="card-body">
       <span className='text-muted'>Результат расчета</span>
       <div className="card-title">{selector?.total?.result === 'ok' ? (
-        <p>Успешно</p>
+        <h1>Успешно</h1>
       ) : <h1>Ошибка</h1> }</div>
         <p>{selector?.total?.message}</p>
     </div>
