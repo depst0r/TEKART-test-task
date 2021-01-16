@@ -11,7 +11,7 @@ import {
 const initialState = {
     step: 1,
     building: null,
-    height: null,
+    height: 1,
     material: null,
     sizeX: null,
     sizeY: null,
