@@ -63,7 +63,10 @@ export const App = () => {
        htmlFor="Garage">Гараж</label>
     </div>
     <div className="card-footer text-muted">
-      <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
+      <button 
+      type="button" 
+      className="btn btn-outline-warning" 
+      onClick={() => dispatch(steps(1))}>Отмена</button>
       {checkedValue && <button
         type="button"
         className="btn btn-outline-info ml-5"
@@ -127,7 +130,9 @@ export const App = () => {
                     id="2" 
                     autoComplete="off"
                     onChange={e => setMaterialValues(e.target.value)} />
-                  <label className="card-text text-success font-weight-bold" htmlFor="2">Шлакоблок</label>
+                  <label 
+                  className="card-text text-success font-weight-bold"
+                  htmlFor="2">Шлакоблок</label>
                   <br />
                   <input 
                   type="radio" 
