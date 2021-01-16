@@ -40,11 +40,27 @@ export const App = () => {
     <div className="card-body">
       <span className='text-muted'>Шаг 1</span>
       <h5 className="card-title">Что будем строить?</h5>
-      <input type="radio" value='1' className="btn-check" name="btnradio" id='House' autoComplete="off" onChange={e => setCeckedValue(e.target.value)} />
-      <label className="card-text text-success font-weight-bold" htmlFor="House">Жилой Дом</label>
+      <input 
+      type="radio" 
+      value='1' 
+      className="btn-check" 
+      name="btnradio" id='House' 
+      autoComplete="off" 
+      onChange={e => setCeckedValue(e.target.value)} />
+      <label 
+      className="card-text text-success font-weight-bold" 
+      htmlFor="House">Жилой Дом</label>
       <br />
-      <input type="radio" value='2' className="btn-check" name="btnradio" id="Garage" autoComplete="off" onChange={e => setCeckedValue(e.target.value)} />
-      <label className="card-text text-success font-weight-bold" htmlFor="Garage">Гараж</label>
+      <input 
+      type="radio" 
+      value='2' 
+      className="btn-check" 
+      name="btnradio" id="Garage" 
+      autoComplete="off" 
+      onChange={e => setCeckedValue(e.target.value)} />
+      <label 
+      className="card-text text-success font-weight-bold"
+       htmlFor="Garage">Гараж</label>
     </div>
     <div className="card-footer text-muted">
       <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
@@ -65,13 +81,25 @@ export const App = () => {
         {selector.building === '1' ? (
           <>
             <div className="card-body">
-              <span className='text-muted'>Шаг 2</span>
-              <h5 className="card-title">Колличество этажей (число):</h5>
-              <input type="number" value={heightValue} onChange={e => setHeightValue(e.target.value)} />
+              <span 
+              className='text-muted'>Шаг 2</span>
+              <h5 
+              className="card-title">Колличество этажей (число):</h5>
+              <input 
+              type="number" 
+              value={heightValue} 
+              onChange={e => setHeightValue(e.target.value)} />
             </div>
             <div className="card-footer text-muted">
-              <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
-              {heightValue && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(height(heightValue), steps(3))}>Далее</button>}
+              <button 
+              type="button"
+               className="btn btn-outline-warning" 
+               onClick={() => dispatch(steps(1))}>Отмена</button>
+              {heightValue && 
+              <button 
+              type="button" 
+              className="btn btn-outline-info ml-5" 
+              onClick={() => click(height(heightValue), steps(3))}>Далее</button>}
             </div>
           </>
         ) : (
@@ -80,18 +108,49 @@ export const App = () => {
                 <div className="card-body">
                   <span className='text-muted'>Шаг 2</span>
                   <h5 className="card-title">Материал Стен:</h5>
-                  <input type="radio" value='1' className="btn-check" name="btnradio" id='1' autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
-                  <label className="card-text text-success font-weight-bold" htmlFor="1">Кирпич</label>
+                  <input 
+                  type="radio" 
+                  value='1' 
+                  className="btn-check" 
+                  name="btnradio" id='1' 
+                  autoComplete="off" 
+                  onChange={e => setMaterialValues(e.target.value)} />
+                  <label 
+                  className="card-text text-success font-weight-bold"
+                   htmlFor="1">Кирпич</label>
                   <br />
-                  <input type="radio" value='2' className="btn-check" name="btnradio" id="2" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
+                  <input 
+                  type="radio"
+                   value='2'
+                    className="btn-check"
+                    name="btnradio" 
+                    id="2" 
+                    autoComplete="off"
+                    onChange={e => setMaterialValues(e.target.value)} />
                   <label className="card-text text-success font-weight-bold" htmlFor="2">Шлакоблок</label>
                   <br />
-                  <input type="radio" value='3' className="btn-check" name="btnradio" id="3" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
-                  <label className="card-text text-success font-weight-bold" htmlFor="3">Деревянный брус</label>
+                  <input 
+                  type="radio" 
+                  value='3'
+                  className="btn-check" 
+                  name="btnradio" 
+                  id="3" 
+                  autoComplete="off" 
+                  onChange={e => setMaterialValues(e.target.value)} />
+                  <label 
+                  className="card-text text-success font-weight-bold" 
+                  htmlFor="3">Деревянный брус</label>
                 </div>
                 <div className="card-footer text-muted">
-                  <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
-                  {materialValues && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
+                  <button 
+                  type="button" 
+                  className="btn btn-outline-warning" 
+                  onClick={() => dispatch(steps(1))}>Отмена</button>
+                  {materialValues && 
+                  <button 
+                  type="button" 
+                  className="btn btn-outline-info ml-5" 
+                  onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
                 </div>
               </>
             </div>
@@ -106,18 +165,51 @@ export const App = () => {
           <div className="card-body">
             <span className='text-muted'>Шаг 3</span>
             <h5 className="card-title">Материал Стен:</h5>
-            <input type="radio" value='1' className="btn-check" name="btnradio" id='1' autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
-            <label className="card-text text-success font-weight-bold" htmlFor="1">Кирпич</label>
+            <input 
+            type="radio" 
+            value='1' 
+            className="btn-check" 
+            name="btnradio" 
+            id='1' 
+            autoComplete="off" 
+            onChange={e => setMaterialValues(e.target.value)} />
+            <label 
+            className="card-text text-success font-weight-bold" 
+            htmlFor="1">
+              Кирпич
+              </label>
             <br />
-            <input type="radio" value='2' className="btn-check" name="btnradio" id="2" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
-            <label className="card-text text-success font-weight-bold" htmlFor="2">Шлакоблок</label>
+            <input 
+            type="radio" 
+            value='2' 
+            className="btn-check" 
+            name="btnradio" 
+            id="2" 
+            autoComplete="off" 
+            onChange={e => setMaterialValues(e.target.value)} />
+            <label 
+            className="card-text text-success font-weight-bold" 
+            htmlFor="2">Шлакоблок</label>
             <br />
-            <input type="radio" value='3' className="btn-check" name="btnradio" id="3" autoComplete="off" onChange={e => setMaterialValues(e.target.value)} />
+            <input 
+            type="radio" 
+            value='3' 
+            className="btn-check"
+            name="btnradio" 
+            id="3" autoComplete="off" 
+            onChange={e => setMaterialValues(e.target.value)} />
             <label className="card-text text-success font-weight-bold" htmlFor="3">Деревянный брус</label>
           </div>
           <div className="card-footer text-muted">
-            <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
-            {materialValues && <button type="button" className="btn btn-outline-info ml-5" onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
+            <button 
+            type="button" 
+            className="btn btn-outline-warning"
+            onClick={() => dispatch(steps(1))}>Отмена</button>
+            {materialValues && 
+            <button 
+            type="button" 
+            className="btn btn-outline-info ml-5" 
+            onClick={() => click(material(materialValues), steps(4))}>Далее</button>}
           </div>
         </>
       )
@@ -133,12 +225,21 @@ export const App = () => {
             <span className='text-muted'>Шаг 4</span>
           )}
           <h5 className="card-title">Длинна стен (в метрах):</h5>
-          <input type="number" value={sizeValue_X} onChange={e => setSizeValue_X(e.target.value)} />
+          <input 
+          type="number" 
+          value={sizeValue_X} 
+          onChange={e => setSizeValue_X(e.target.value)} />
           <span>X</span>
-          <input type="number" value={sizeValue_Y} onChange={e => setSizeValue_Y(e.target.value)} />
+          <input 
+          type="number" 
+          value={sizeValue_Y} 
+          onChange={e => setSizeValue_Y(e.target.value)} />
         </div>
         <div className="card-footer text-muted">
-          <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Отмена</button>
+          <button 
+          type="button" 
+          className="btn btn-outline-warning" 
+          onClick={() => dispatch(steps(1))}>Отмена</button>
           <button
             type="button"
             className="btn btn-outline-info ml-5"
@@ -168,7 +269,10 @@ export const App = () => {
           </div>
         </div>
         <div className="card-footer text-muted">
-          <button type="button" className="btn btn-outline-warning" onClick={() => dispatch(steps(1))}>Новый расчет</button>
+          <button 
+          type="button" 
+          className="btn btn-outline-warning" 
+          onClick={() => dispatch(steps(1))}>Новый расчет</button>
         </div>
       </>
     )
