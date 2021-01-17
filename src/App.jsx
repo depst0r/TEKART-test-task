@@ -7,13 +7,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 const StepOne = () => {
 
   const dispatch = useDispatch()
+  const state = useSelector(state => state.rootReducer)
 
-  const [checkedValue, setCeckedValue] = useState(String)
-
-  const handleSubmiteClick = (action, step) => {
-    dispatch(action)
-    dispatch(step)
-  }
   return (
     <>
       <div className="card-body">
@@ -25,7 +20,7 @@ const StepOne = () => {
           className="btn-check"
           name="btnradio" id='House'
           autoComplete="off"
-          onChange={e => setCeckedValue(e.target.value)} />
+          onChange={e => dispatch(building(e.target.value))} />
         <label
           className="card-text text-success font-weight-bold"
           htmlFor="House">Жилой Дом</label>
@@ -36,7 +31,7 @@ const StepOne = () => {
           className="btn-check"
           name="btnradio" id="Garage"
           autoComplete="off"
-          onChange={e => setCeckedValue(e.target.value)} />
+          onChange={e => dispatch(building(e.target.value))} />
         <label
           className="card-text text-success font-weight-bold"
           htmlFor="Garage">Гараж</label>
@@ -46,11 +41,10 @@ const StepOne = () => {
           type="button"
           className="btn btn-outline-warning"
           onClick={() => dispatch(steps(1))}>Отмена</button>
-        {checkedValue && <button
+        {state.building && <button
           type="button"
           className="btn btn-outline-info ml-5"
-          onClick={() =>
-            handleSubmiteClick(building(checkedValue), steps(2))}>Далее</button>
+          onClick={() => dispatch(steps(2))}>Далее</button>
         }
       </div>
     </>
@@ -58,15 +52,9 @@ const StepOne = () => {
 }
 
  const StepTwo = () => {
-  // const [heightValue, setHeightValue] = useState('')
 
   const dispatch = useDispatch()
   const state = useSelector(state => state.rootReducer)
-
-  // const handleSubmiteClick = (action, step) => {
-  //   dispatch(action)
-  //   dispatch(step)
-  // }
 
   return (
     <>
@@ -97,20 +85,14 @@ const StepOne = () => {
 
  const StepThree = () => {
 
-  const [materialValues, setMaterialValues] = useState(String)
-
-  const selector = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state.rootReducer)
   const dispatch = useDispatch()
 
-  const handleSubmiteClick = (action, step) => {
-    dispatch(action)
-    dispatch(step)
-  }
 
   return (
     <>
       <div className="card-body">
-        {selector.building === '1' ? (
+        {state.building === '1' ? (
           <span className='text-muted'>Шаг 3</span>
         ) : (
           <span className='text-muted'>Шаг 2</span>
@@ -123,7 +105,7 @@ const StepOne = () => {
           name="btnradio"
           id='1'
           autoComplete="off"
-          onChange={e => setMaterialValues(e.target.value)} />
+          onChange={e => dispatch(material(e.target.value))} />
         <label
           className="card-text text-success font-weight-bold"
           htmlFor="1">
@@ -137,7 +119,7 @@ const StepOne = () => {
           name="btnradio"
           id="2"
           autoComplete="off"
-          onChange={e => setMaterialValues(e.target.value)} />
+          onChange={e => dispatch(material(e.target.value))} />
         <label
           className="card-text text-success font-weight-bold"
           htmlFor="2">Шлакоблок</label>
@@ -148,7 +130,7 @@ const StepOne = () => {
           className="btn-check"
           name="btnradio"
           id="3" autoComplete="off"
-          onChange={e => setMaterialValues(e.target.value)} />
+          onChange={e => dispatch(material(e.target.value))} />
         <label className="card-text text-success font-weight-bold" htmlFor="3">Деревянный брус</label>
       </div>
       <div className="card-footer text-muted">
@@ -156,11 +138,11 @@ const StepOne = () => {
           type="button"
           className="btn btn-outline-warning"
           onClick={() => dispatch(steps(1))}>Отмена</button>
-        {materialValues &&
+        {state.material &&
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => handleSubmiteClick(material(materialValues), steps(4))}>Далее</button>}
+            onClick={() => dispatch(steps(4))}>Далее</button>}
       </div>
     </>
   )
@@ -168,15 +150,10 @@ const StepOne = () => {
 
  const StepFour = () => {
 
-  const [sizeValue_X, setSizeValue_X] = useState(String)
-  const [sizeValue_Y, setSizeValue_Y] = useState(String)
-
-  const selector = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state.rootReducer)
   const dispatch = useDispatch()
 
-  const size = (arg2, arg3, step) => {
-    dispatch(arg2)
-    dispatch(arg3)
+  const buildingRequest = (step) => {
     dispatch(step)
     totalResponse()
   }
@@ -190,7 +167,7 @@ const StepOne = () => {
   return (
     <>
       <div className="card-body">
-        {selector.building === '2' ? (
+        {state.building === '2' ? (
           <span className='text-muted'>Шаг 3</span>
         ) : (
             <span className='text-muted'>Шаг 4</span>
@@ -198,13 +175,13 @@ const StepOne = () => {
         <h5 className="card-title">Длинна стен (в метрах):</h5>
         <input
           type="number"
-          value={sizeValue_X}
-          onChange={e => setSizeValue_X(e.target.value)} />
+          value={state.sizeX}
+          onChange={e => dispatch(sizeX(e.target.value))} />
         <span>X</span>
         <input
           type="number"
-          value={sizeValue_Y}
-          onChange={e => setSizeValue_Y(e.target.value)} />
+          value={state.sizeY}
+          onChange={e => dispatch(sizeY(e.target.value))} />
       </div>
       <div className="card-footer text-muted">
         <button
@@ -214,7 +191,7 @@ const StepOne = () => {
         <button
           type="button"
           className="btn btn-outline-info ml-5"
-          onClick={() => size(sizeX(sizeValue_X), sizeY(sizeValue_Y), steps(5))}
+          onClick={() => buildingRequest(steps(5))}
         >Далее</button>
       </div>
     </>
@@ -224,21 +201,21 @@ const StepOne = () => {
  const StepFive = () => {
 
   const dispatch = useDispatch()
-  const selector = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state.rootReducer)
 
   return (
     <>
       <div className="card-body">
         <span className='text-muted'>Результат расчета</span>
-        <div className="card-title">{selector?.total?.result === 'ok' ? (
+        <div className="card-title">{state?.total?.result === 'ok' ? (
           <>
             <h1>Успешно</h1>
-            <p>{selector?.total?.message}</p>
+            <p>{state?.total?.message}</p>
           </>
         ) :
           <>
             <h1>Ошибка</h1>
-            <p className='text-danger'>{selector?.total?.message}</p>
+            <p className='text-danger'>{state?.total?.message}</p>
           </>
         }
         </div>
@@ -255,15 +232,15 @@ const StepOne = () => {
 
 export const App = () => {
 
-  const selector = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state.rootReducer)
 
   const renderItems = () => {
-    switch (selector.step) {
+    switch (state.step) {
       case 1:
          return <StepOne />
       case 2:
           return <>
-            {selector.building === '2' ? (
+            {state.building === '2' ? (
               <StepThree />
             ) : <StepTwo />}
           </>
