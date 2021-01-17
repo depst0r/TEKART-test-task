@@ -5,7 +5,8 @@ import {
     SIZE_X,
     SIZE_Y,
     TOTAL,
-    STEPS
+    STEPS,
+    GET_DATA
 } from '../Actions/actionType'
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
     sizeX: null,
     sizeY: null,
     total: null,
+    data: null
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -50,11 +52,15 @@ export const rootReducer = (state = initialState, action) => {
                 ...state,
                 step: action.payload
             }
-        case TOTAL: 
-        console.log('total', action.data)
+        case GET_DATA:
             return {
                 ...state,
-                total: action.data
+                data: action.payload
+            }
+        case TOTAL: 
+            return {
+                ...state,
+                total: action.payload
             }
         default: 
             return state

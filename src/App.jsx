@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material, sizeX, sizeY, steps, getTotal } from './Redux/Actions/actions'
+import { building, height, material, sizeX, sizeY, steps, getTotal, getData } from './Redux/Actions/actions'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -58,14 +58,15 @@ const StepOne = () => {
 }
 
  const StepTwo = () => {
-  const [heightValue, setHeightValue] = useState(String)
+  // const [heightValue, setHeightValue] = useState('')
 
   const dispatch = useDispatch()
+  const state = useSelector(state => state.rootReducer)
 
-  const handleSubmiteClick = (action, step) => {
-    dispatch(action)
-    dispatch(step)
-  }
+  // const handleSubmiteClick = (action, step) => {
+  //   dispatch(action)
+  //   dispatch(step)
+  // }
 
   return (
     <>
@@ -76,19 +77,19 @@ const StepOne = () => {
           className="card-title">Колличество этажей (число):</h5>
         <input
           type="number"
-          value={heightValue}
-          onChange={e => setHeightValue(e.target.value)} />
+          value={state.height}
+          onChange={e => dispatch(height(e.target.value))} />
       </div>
       <div className="card-footer text-muted">
         <button
           type="button"
           className="btn btn-outline-warning"
           onClick={() => dispatch(steps(1))}>Отмена</button>
-        {heightValue &&
+        {state.height &&
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => handleSubmiteClick(height(heightValue), steps(3))}>Далее</button>}
+            onClick={() => dispatch(steps(3))}>Далее</button>}
       </div>
         </>
   )
