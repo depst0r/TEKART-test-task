@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material, sizeX, sizeY, steps, getTotal } from './Redux/Actions/actions'
+import { building, height, material, sizeX, sizeY, steps, getTotal, resetState } from './Redux/Actions/actions'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -40,7 +40,7 @@ const StepOne = () => {
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(steps(1))}>Отмена</button>
+          onClick={() => dispatch(resetState())}>Отмена</button>
         {state.building && <button
           type="button"
           className="btn btn-outline-info ml-5"
@@ -72,7 +72,7 @@ const StepOne = () => {
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(steps(1))}>Отмена</button>
+          onClick={() => dispatch(resetState())}>Отмена</button>
         {state.height &&
           <button
             type="button"
@@ -187,7 +187,7 @@ const StepOne = () => {
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(steps(1))}>Отмена</button>
+          onClick={() => dispatch(resetState())}>Отмена</button>
         <button
           type="button"
           className="btn btn-outline-info ml-5"
@@ -224,7 +224,7 @@ const StepOne = () => {
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(steps(1))}>Новый расчет</button>
+          onClick={() => dispatch(resetState())}>Новый расчет</button>
       </div>
     </>
   )

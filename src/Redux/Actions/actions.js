@@ -6,7 +6,8 @@ import {
     SIZE_Y,
     TOTAL,
     SIZE,
-    STEPS
+    STEPS,
+    RESET_STATE
 } from './actionType'
 
 export const building = text => ({ type: BUILDING, payload: text })
@@ -17,6 +18,7 @@ export const sizeY = text => ({ type: SIZE_Y, payload: text })
 export const total = url => ({ type: TOTAL, payload: url })
 export const size = arr => ({ type: SIZE, payload: arr})
 export const steps = step => ({ type: STEPS, payload: step })
+export const resetState = state => ({ type: RESET_STATE, payload: state })
 
 export const getTotal = () => {
     return (dispatch, getState) => {

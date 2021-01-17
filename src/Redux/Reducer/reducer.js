@@ -6,6 +6,7 @@ import {
     SIZE_Y,
     TOTAL,
     STEPS,
+    RESET_STATE,
 } from '../Actions/actionType'
 
 const initialState = {
@@ -15,7 +16,7 @@ const initialState = {
     material: null,
     sizeX: null,
     sizeY: null,
-    total: null,
+    total: null
 }
 
 export const reducer = (state = initialState, action) => {
@@ -44,6 +45,10 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 sizeY: action.payload
+            }
+        case RESET_STATE:
+            return {
+                ...state = initialState
             }
         case STEPS:
             return {
