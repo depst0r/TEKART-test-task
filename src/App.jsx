@@ -4,7 +4,7 @@ import { building, height, material, sizeX, sizeY, steps, getTotal } from './Red
 
 import 'bootstrap/dist/css/bootstrap.css'
 
-export const Step_1 = () => {
+const StepOne = () => {
 
   const dispatch = useDispatch()
 
@@ -57,7 +57,7 @@ export const Step_1 = () => {
   )
 }
 
-export const Step_2 = () => {
+ const StepTwo = () => {
   const [heightValue, setHeightValue] = useState(String)
 
   const dispatch = useDispatch()
@@ -94,7 +94,7 @@ export const Step_2 = () => {
   )
 }
 
-export const Step_3 = () => {
+ const StepThree = () => {
 
   const [materialValues, setMaterialValues] = useState(String)
 
@@ -165,7 +165,7 @@ export const Step_3 = () => {
   )
 }
 
-export const Step_4 = () => {
+ const StepFour = () => {
 
   const [sizeValue_X, setSizeValue_X] = useState(String)
   const [sizeValue_Y, setSizeValue_Y] = useState(String)
@@ -220,7 +220,7 @@ export const Step_4 = () => {
   )
 }
 
-export const Step_5 = () => {
+ const StepFive = () => {
 
   const dispatch = useDispatch()
   const selector = useSelector(state => state.rootReducer)
@@ -259,19 +259,19 @@ export const App = () => {
   const renderItems = () => {
     switch (selector.step) {
       case 1:
-         return <Step_1 />
+         return <StepOne />
       case 2:
           return <>
             {selector.building === '2' ? (
-              <Step_3 />
-            ) : <Step_2 />}
+              <StepThree />
+            ) : <StepTwo />}
           </>
       case 3:
-        return <Step_3 />
+        return <StepThree />
       case 4:
-        return <Step_4 />
+        return <StepFour />
       case 5:
-        return <Step_5/>
+        return <StepFive />
       default:
         break;
     }
