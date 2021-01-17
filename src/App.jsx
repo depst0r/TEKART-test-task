@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material, sizeX, sizeY, steps, getTotal, getData } from './Redux/Actions/actions'
+import { building, height, material, sizeX, sizeY, steps, getTotal } from './Redux/Actions/actions'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
 const StepOne = () => {
 
   const dispatch = useDispatch()
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
 
   return (
     <>
@@ -54,7 +54,7 @@ const StepOne = () => {
  const StepTwo = () => {
 
   const dispatch = useDispatch()
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
 
   return (
     <>
@@ -85,7 +85,7 @@ const StepOne = () => {
 
  const StepThree = () => {
 
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
   const dispatch = useDispatch()
 
 
@@ -150,7 +150,7 @@ const StepOne = () => {
 
  const StepFour = () => {
 
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
   const dispatch = useDispatch()
 
   const buildingRequest = (step) => {
@@ -201,7 +201,7 @@ const StepOne = () => {
  const StepFive = () => {
 
   const dispatch = useDispatch()
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
 
   return (
     <>
@@ -232,7 +232,7 @@ const StepOne = () => {
 
 export const App = () => {
 
-  const state = useSelector(state => state.rootReducer)
+  const state = useSelector(state => state)
 
   const renderItems = () => {
     switch (state.step) {

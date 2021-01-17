@@ -6,7 +6,6 @@ import {
     SIZE_Y,
     TOTAL,
     STEPS,
-    GET_DATA
 } from '../Actions/actionType'
 
 const initialState = {
@@ -17,10 +16,9 @@ const initialState = {
     sizeX: null,
     sizeY: null,
     total: null,
-    data: null
 }
 
-export const rootReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case BUILDING:
             return {
@@ -51,11 +49,6 @@ export const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 step: action.payload
-            }
-        case GET_DATA:
-            return {
-                ...state,
-                data: action.payload
             }
         case TOTAL: 
             return {
