@@ -5,7 +5,7 @@ import { setData, setStep, getPrice, resetState } from "./Redux/Actions/actions"
 import "bootstrap/dist/css/bootstrap.css";
 
 const StepOne = ({ setValue, building, resetState, setStep }) => {
-  const handleChangeValue = (event) => {
+  const handleChangeValue = event => {
     setValue("building", event.target.value);
   }
 
@@ -71,7 +71,7 @@ const StepOne = ({ setValue, building, resetState, setStep }) => {
 }
 
 const StepTwo = ({ setValue, height, resetState, setStep }) => {
-  const handleChangeValue = (event) => {
+  const handleChangeValue = event => {
     setValue("height", event.target.value);
   };
 
@@ -107,7 +107,7 @@ const StepTwo = ({ setValue, height, resetState, setStep }) => {
 }
 
 const StepThree = ({ stepNumber, setValue, material, resetState, setStep }) => {
-  const handleChangeValue = (event) => {
+  const handleChangeValue = event => {
     setValue("material", event.target.value);
   };
 
@@ -188,7 +188,7 @@ const StepFour = ({
   setStep,
   onSubmit
 }) => {
-  const handleChangeValue = (event) => {
+  const handleChangeValue = event => {
     setValue(event.target.name, event.target.value);
   };
 
@@ -290,7 +290,7 @@ export const App = () => {
 
   const handleResetState = () => dispatch(resetState());
 
-  const handleSetStep = (value) => {
+  const handleSetStep = value => {
     if (value === 2 && state.building === "2") {
       dispatch(setStep(3));
     } else {
