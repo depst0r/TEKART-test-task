@@ -1,30 +1,25 @@
-import {
-    BUILDING,
-    HEIGHT,
-    MATERIAL,
-    SIZE_X,
-    SIZE_Y,
-    TOTAL,
-    SIZE,
-    STEPS,
-    RESET_STATE
-} from './actionType'
+export const SET_DATA = "SET_DATA";
+export const SET_PRICE = "SET_PRICE";
+export const SET_STEP = "SET_STEP";
+export const RESET_STATE = "RESET_STATE";
+export const SET_LOADING = "SET_LOADING";
 
-export const building = text => ({ type: BUILDING, payload: text })
-export const height = text => ({ type: HEIGHT, payload: text })
-export const material = text => ({ type: MATERIAL, payload: text })
-export const sizeX = text => ({ type: SIZE_X, payload: text })
-export const sizeY = text => ({ type: SIZE_Y, payload: text })
-export const total = url => ({ type: TOTAL, payload: url })
-export const size = arr => ({ type: SIZE, payload: arr})
-export const steps = step => ({ type: STEPS, payload: step })
-export const resetState = state => ({ type: RESET_STATE, payload: state })
+export const setData = payload => ({ type: SET_DATA, payload });
+export const setStep = step => ({ type: SET_STEP, payload: step });
+export const resetState = () => ({ type: RESET_STATE });
 
-export const getTotal = () => {
-    return (dispatch, getState) => {
-        const {  building, height, material, sizeX, sizeY  } = getState()
-        fetch(`https://data.techart.ru/lab/json/?building=${building}&height=${height}&material=${material}&sizex=${sizeX}&sizey=${sizeY}`)
-            .then(res => res.json())
-            .then(res => dispatch({ type: TOTAL, payload: res }))
-    }
+export const getPrice = () => {
+  return (dispatch, getState) => {
+    dispatch({ type: SET_LOADING, payload: true })
+    const { building, height, material, sizeX, sizeY } = getState()
+    fetch(
+      `https://data.techart.ru/lab/json/?building=${building}&height=${height}&material=${material}&sizex=${sizeX}&sizey=${sizeY}`
+    )
+      .then(res => res.json())
+      .then(res => {
+        dispatch({ type: SET_PRICE, data: res })
+        dispatch({ type: SET_LOADING, payload: false })
+      })
+      .catch(err => dispatch({ type: SET_LOADING, payload: false }))
+  }
 }

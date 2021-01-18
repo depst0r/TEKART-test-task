@@ -1,266 +1,365 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { building, height, material, sizeX, sizeY, steps, getTotal, resetState } from './Redux/Actions/actions'
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setData, setStep, getPrice, resetState } from "./Redux/Actions/actions"
 
-import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap/dist/css/bootstrap.css";
 
-const StepOne = () => {
+const StepOne = ({ setValue, building, resetState, setStep }) => {
+  const handleChangeValue = (event) => {
+    setValue("building", event.target.value);
+  }
 
-  const dispatch = useDispatch()
-  const state = useSelector(state => state)
+  const handleNext = () => setStep(2);
 
   return (
     <>
       <div className="card-body">
-        <span className='text-muted'>Шаг 1</span>
+        <span className="text-muted">Шаг 1</span>
         <h5 className="card-title">Что будем строить?</h5>
         <input
           type="radio"
-          value='1'
+          value="1"
           className="btn-check"
-          name="btnradio" id='House'
+          name="btnradio"
+          id="House"
           autoComplete="off"
-          onChange={e => dispatch(building(e.target.value))} />
+          onChange={handleChangeValue}
+        />
         <label
           className="card-text text-success font-weight-bold"
-          htmlFor="House">Жилой Дом</label>
+          htmlFor="House"
+        >
+          Жилой Дом
+        </label>
         <br />
         <input
           type="radio"
-          value='2'
+          value="2"
           className="btn-check"
-          name="btnradio" id="Garage"
+          name="btnradio"
+          id="Garage"
           autoComplete="off"
-          onChange={e => dispatch(building(e.target.value))} />
+          onChange={handleChangeValue}
+        />
         <label
           className="card-text text-success font-weight-bold"
-          htmlFor="Garage">Гараж</label>
+          htmlFor="Garage"
+        >
+          Гараж
+        </label>
       </div>
       <div className="card-footer text-muted">
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(resetState())}>Отмена</button>
-        {state.building && <button
-          type="button"
-          className="btn btn-outline-info ml-5"
-          onClick={() => dispatch(steps(2))}>Далее</button>
-        }
-      </div>
-    </>
-  )
-}
-
- const StepTwo = () => {
-
-  const dispatch = useDispatch()
-  const state = useSelector(state => state)
-
-  return (
-    <>
-      <div className="card-body">
-        <span
-          className='text-muted'>Шаг 2</span>
-        <h5
-          className="card-title">Колличество этажей (число):</h5>
-        <input
-          type="number"
-          value={state.height}
-          onChange={e => dispatch(height(e.target.value))} />
-      </div>
-      <div className="card-footer text-muted">
-        <button
-          type="button"
-          className="btn btn-outline-warning"
-          onClick={() => dispatch(resetState())}>Отмена</button>
-        {state.height &&
+          onClick={resetState}
+        >
+          Отмена
+        </button>
+        {building && (
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => dispatch(steps(3))}>Далее</button>}
+            onClick={handleNext}
+          >
+            Далее
+          </button>
+        )}
       </div>
-        </>
-  )
+    </>
+  );
 }
 
- const StepThree = () => {
+const StepTwo = ({ setValue, height, resetState, setStep }) => {
+  const handleChangeValue = (event) => {
+    setValue("height", event.target.value);
+  };
 
-  const state = useSelector(state => state)
-  const dispatch = useDispatch()
-
+  const handleNext = () => setStep(3);
 
   return (
     <>
       <div className="card-body">
-        {state.building === '1' ? (
-          <span className='text-muted'>Шаг 3</span>
-        ) : (
-          <span className='text-muted'>Шаг 2</span>
+        <span className="text-muted">Шаг 2</span>
+        <h5 className="card-title">Колличество этажей (число):</h5>
+        <input type="number" onChange={handleChangeValue} />
+      </div>
+      <div className="card-footer text-muted">
+        <button
+          type="button"
+          className="btn btn-outline-warning"
+          onClick={resetState}
+        >
+          Отмена
+        </button>
+        {height && (
+          <button
+            type="button"
+            className="btn btn-outline-info ml-5"
+            onClick={handleNext}
+          >
+            Далее
+          </button>
         )}
+      </div>
+    </>
+  );
+}
+
+const StepThree = ({ stepNumber, setValue, material, resetState, setStep }) => {
+  const handleChangeValue = (event) => {
+    setValue("material", event.target.value);
+  };
+
+  const handleNext = () => setStep(4);
+
+  return (
+    <>
+      <div className="card-body">
+        <span className="text-muted">Шаг {stepNumber}</span>
         <h5 className="card-title">Материал Стен:</h5>
         <input
           type="radio"
-          value='1'
+          value="1"
           className="btn-check"
           name="btnradio"
-          id='1'
+          id="1"
           autoComplete="off"
-          onChange={e => dispatch(material(e.target.value))} />
-        <label
-          className="card-text text-success font-weight-bold"
-          htmlFor="1">
+          onChange={handleChangeValue}
+        />
+        <label className="card-text text-success font-weight-bold" htmlFor="1">
           Кирпич
-            </label>
+        </label>
         <br />
         <input
           type="radio"
-          value='2'
+          value="2"
           className="btn-check"
           name="btnradio"
           id="2"
           autoComplete="off"
-          onChange={e => dispatch(material(e.target.value))} />
-        <label
-          className="card-text text-success font-weight-bold"
-          htmlFor="2">Шлакоблок</label>
+          onChange={handleChangeValue}
+        />
+        <label className="card-text text-success font-weight-bold" htmlFor="2">
+          Шлакоблок
+        </label>
         <br />
         <input
           type="radio"
-          value='3'
+          value="3"
           className="btn-check"
           name="btnradio"
-          id="3" autoComplete="off"
-          onChange={e => dispatch(material(e.target.value))} />
-        <label className="card-text text-success font-weight-bold" htmlFor="3">Деревянный брус</label>
+          id="3"
+          autoComplete="off"
+          onChange={handleChangeValue}
+        />
+        <label className="card-text text-success font-weight-bold" htmlFor="3">
+          Деревянный брус
+        </label>
       </div>
       <div className="card-footer text-muted">
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(steps(1))}>Отмена</button>
-        {state.material &&
+          onClick={resetState}
+        >
+          Отмена
+        </button>
+        {material && (
           <button
             type="button"
             className="btn btn-outline-info ml-5"
-            onClick={() => dispatch(steps(4))}>Далее</button>}
+            onClick={handleNext}
+          >
+            Далее
+          </button>
+        )}
       </div>
     </>
-  )
+  );
 }
 
- const StepFour = () => {
+const StepFour = ({
+  stepNumber,
+  setValue,
+  sizeX,
+  sizeY,
+  resetState,
+  setStep,
+  onSubmit
+}) => {
+  const handleChangeValue = (event) => {
+    setValue(event.target.name, event.target.value);
+  };
 
-  const state = useSelector(state => state)
-  const dispatch = useDispatch()
-
-  const buildingRequest = (step) => {
-    dispatch(step)
-    totalResponse()
-  }
-
-  const totalResponse = () => {
-    dispatch(
-      getTotal()
-    )
-  }
+  const handleNext = () => {
+    onSubmit();
+    setStep(5);
+  };
 
   return (
     <>
       <div className="card-body">
-        {state.building === '2' ? (
-          <span className='text-muted'>Шаг 3</span>
-        ) : (
-            <span className='text-muted'>Шаг 4</span>
-          )}
+        <span className="text-muted">Шаг {stepNumber}</span>
         <h5 className="card-title">Длинна стен (в метрах):</h5>
-        <input
-          type="number"
-          value={state.sizeX}
-          onChange={e => dispatch(sizeX(e.target.value))} />
+        <input type="number" name="sizeX" onChange={handleChangeValue} />
         <span>X</span>
-        <input
-          type="number"
-          value={state.sizeY}
-          onChange={e => dispatch(sizeY(e.target.value))} />
+        <input type="number" name="sizeY" onChange={handleChangeValue} />
       </div>
       <div className="card-footer text-muted">
         <button
           type="button"
           className="btn btn-outline-warning"
-          onClick={() => dispatch(resetState())}>Отмена</button>
-        <button
-          type="button"
-          className="btn btn-outline-info ml-5"
-          onClick={() => buildingRequest(steps(5))}
-        >Далее</button>
+          onClick={resetState}
+        >
+          Отмена
+        </button>
+        {sizeX && sizeY && (
+          <button
+            type="button"
+            className="btn btn-outline-info ml-5"
+            onClick={handleNext}
+          >
+            Далее
+          </button>
+        )}
       </div>
     </>
-  )
+  );
 }
 
- const StepFive = () => {
-
-  const dispatch = useDispatch()
-  const state = useSelector(state => state)
-
+const StepFive = ({ resetState, result, message, isLoading }) => {
   return (
     <>
-      <div className="card-body">
-        <span className='text-muted'>Результат расчета</span>
-        <div className="card-title">{state?.total?.result === 'ok' ? (
-          <>
-            <h1>Успешно</h1>
-            <p>{state?.total?.message}</p>
-          </>
-        ) :
-          <>
-            <h1>Ошибка</h1>
-            <p className='text-danger'>{state?.total?.message}</p>
-          </>
-        }
+      {isLoading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          Загрузка...
         </div>
-      </div>
-      <div className="card-footer text-muted">
-        <button
-          type="button"
-          className="btn btn-outline-warning"
-          onClick={() => dispatch(resetState())}>Новый расчет</button>
-      </div>
+      )}
+      {!isLoading && (
+        <>
+          <div className="card-body">
+            <span className="text-muted">Результат расчета</span>
+            <div className="card-title">
+              {result === "ok" ? (
+                <>
+                  <h1>Успешно</h1>
+                  <p>{message}</p>
+                </>
+              ) : (
+                <>
+                  <h1>Ошибка</h1>
+                  <p className="text-danger">{message}</p>
+                </>
+              )}
+            </div>
+          </div>
+          <div className="card-footer text-muted">
+            <button
+              type="button"
+              className="btn btn-outline-warning"
+              onClick={resetState}
+            >
+              Новый расчет
+            </button>
+          </div>
+        </>
+      )}
     </>
-  )
+  );
 }
 
 export const App = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
-  const state = useSelector(state => state)
+  const setValue = (key, value) => {
+    dispatch(
+      setData({
+        dataKey: key,
+        dataValue: value
+      })
+    );
+  };
 
-  const renderItems = () => {
+  const handleResetState = () => dispatch(resetState());
+
+  const handleSetStep = (value) => {
+    if (value === 2 && state.building === "2") {
+      dispatch(setStep(3));
+    } else {
+      dispatch(setStep(value));
+    }
+  };
+
+  const handleSubmit = () => dispatch(getPrice());
+
+  const renderSteps = () => {
     switch (state.step) {
       case 1:
-         return <StepOne />
+        return (
+          <StepOne
+            setValue={setValue}
+            building={state.building}
+            resetState={handleResetState}
+            setStep={handleSetStep}
+          />
+        );
       case 2:
-          return <>
-            {state.building === '2' ? (
-              <StepThree />
-            ) : <StepTwo />}
-          </>
+        return (
+          <StepTwo
+            setValue={setValue}
+            height={state.height}
+            resetState={handleResetState}
+            setStep={handleSetStep}
+          />
+        );
       case 3:
-        return <StepThree />
+        return (
+          <StepThree
+            setValue={setValue}
+            material={state.material}
+            resetState={handleResetState}
+            setStep={handleSetStep}
+            stepNumber={state.building === "2" ? 2 : 3}
+          />
+        );
       case 4:
-        return <StepFour />
+        return (
+          <StepFour
+            setValue={setValue}
+            sizeX={state.sizeX}
+            sizeY={state.sizeY}
+            resetState={handleResetState}
+            setStep={handleSetStep}
+            stepNumber={state.building === "2" ? 3 : 4}
+            onSubmit={handleSubmit}
+          />
+        );
       case 5:
-        return <StepFive />
+        return (
+          <StepFive
+            resetState={handleResetState}
+            result={state?.result?.result}
+            message={state?.result?.message}
+            isLoading={state.isLoading}
+          />
+        );
       default:
         break;
     }
-  }
+  };
 
-  return <>
+  return (
     <div className="card text-center">
-      <div className="card-header">
-        Калькулятор цены конструкций
-     </div>
-      {renderItems()}
+      <div className="card-header">Калькулятор цены конструкций</div>
+      {renderSteps()}
     </div>
-  </>
+  );
 }
